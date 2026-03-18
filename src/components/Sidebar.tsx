@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { handleSignOut } from "@/lib/actions";
 
 const navItems = [
   { href: "/dashboard", icon: "⊞", label: "Dashboard" },
@@ -58,22 +59,28 @@ export default function Sidebar({ user }: { user?: User }) {
       </nav>
 
       {/* User */}
-      <div className="px-5 py-4 border-t border-[#1e1e30] flex items-center gap-3">
-        {user?.image ? (
-          <img
-            src={user.image}
-            alt="avatar"
-            className="w-8 h-8 rounded-full"
-          />
-        ) : (
-          <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-xs font-bold text-white">
-            {user?.name?.[0] ?? "?"}
+      <div className="px-4 py-4 border-t border-[#1e1e30]">
+        <div className="flex items-center gap-3 mb-3">
+          {user?.image ? (
+            <img src={user.image} alt="avatar" className="w-8 h-8 rounded-full" />
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-xs font-bold text-white">
+              {user?.name?.[0] ?? "?"}
+            </div>
+          )}
+          <div className="flex-1 min-w-0">
+            <div className="text-xs font-bold text-slate-200 truncate">{user?.name}</div>
+            <div className="text-xs text-slate-500">Admin</div>
           </div>
-        )}
-        <div>
-          <div className="text-xs font-bold text-slate-200">{user?.name}</div>
-          <div className="text-xs text-slate-500">Admin</div>
         </div>
+        <form action={handleSignOut}>
+  <button
+    type="submit"
+    className="w-full text-xs font-bold text-slate-500 hover:text-red-400 transition-colors py-1.5 rounded-lg hover:bg-[#1e1e30] text-left px-2"
+  >
+    ↪ Sign out
+  </button>
+</form>
       </div>
 
     </div>
