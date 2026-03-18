@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
+import NewBoardModal from "@/components/NewBoardModal";
 
 export default async function BoardsPage({
   searchParams,
@@ -59,9 +60,9 @@ export default async function BoardsPage({
               </Link>
             ))}
           </div>
-          <button className="bg-indigo-500 hover:bg-indigo-600 transition-colors text-white text-sm font-bold px-4 py-2 rounded-lg">
-            + New Board
-          </button>
+          
+          <NewBoardModal teams={teams} />
+
         </div>
       </div>
 

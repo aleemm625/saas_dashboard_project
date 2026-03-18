@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
+import NewTeamModal from "@/components/NewTeamModal";
 
 export default async function TeamsPage() {
   const teams = await db.team.findMany({
@@ -18,9 +19,9 @@ export default async function TeamsPage() {
           <h1 className="text-2xl font-black text-slate-100 tracking-tight">Teams</h1>
           <p className="text-sm text-slate-500 mt-1">Manage your workspace teams</p>
         </div>
-        <button className="bg-indigo-500 hover:bg-indigo-600 transition-colors text-white text-sm font-bold px-4 py-2.5 rounded-lg">
-          + New Team
-        </button>
+        
+        <NewTeamModal />
+        
       </div>
 
       {/* Teams grid */}

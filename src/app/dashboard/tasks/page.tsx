@@ -1,5 +1,6 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
+import NewTaskModal from "@/components/NewTaskModal";
 
 const statusConfig = {
   TODO: { label: "To Do", color: "text-slate-400", bg: "bg-[#1e293b]", dot: "bg-slate-400" },
@@ -78,9 +79,7 @@ export default async function TasksPage({
               </Link>
             ))}
           </div>
-          <button className="bg-indigo-500 hover:bg-indigo-600 transition-colors text-white text-sm font-bold px-4 py-2 rounded-lg">
-            + New Task
-          </button>
+          <NewTaskModal boards={boards} />
         </div>
       </div>
 
