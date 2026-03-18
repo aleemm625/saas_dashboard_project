@@ -22,11 +22,14 @@ export default async function AdminPage() {
     }),
   ]);
 
+  type UserWithRelations = typeof users[number];
+  type TeamWithRelations = typeof teams[number];
+  type TaskStat = typeof tasks[number];
+
   const avatarColors = ["#6366f1", "#f59e0b", "#10b981", "#ef4444", "#8b5cf6"];
 
   return (
     <div className="p-8">
-      {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-black text-slate-100 tracking-tight">Admin Panel</h1>
         <p className="text-sm text-slate-500 mt-1">Workspace settings and management</p>
@@ -38,14 +41,13 @@ export default async function AdminPage() {
         <div>
           <div className="text-xs font-bold text-slate-500 tracking-widest mb-4">USERS</div>
           <div className="bg-[#0f0f18] border border-[#1e1e30] rounded-xl overflow-hidden">
-            {/* Table header */}
             <div className="grid grid-cols-4 px-6 py-3 border-b border-[#1e1e30] text-xs font-bold text-slate-600 tracking-widest">
               <span>USER</span>
               <span>ROLE</span>
               <span>TEAMS</span>
               <span>TASKS</span>
             </div>
-            {users.map((user, i) => {
+            {users.map((user: UserWithRelations, i: number) => {
               const color = avatarColors[user.name ? user.name.charCodeAt(0) % avatarColors.length : 0];
               return (
                 <div
@@ -79,10 +81,7 @@ export default async function AdminPage() {
                         <span
                           key={m.teamId}
                           className="text-xs px-2 py-0.5 rounded font-bold"
-                          style={{
-                            background: m.team.color + "22",
-                            color: m.team.color,
-                          }}
+                          style={{ background: m.team.color + "22", color: m.team.color }}
                         >
                           {m.team.name}
                         </span>
@@ -102,7 +101,7 @@ export default async function AdminPage() {
         <div>
           <div className="text-xs font-bold text-slate-500 tracking-widest mb-4">TEAMS</div>
           <div className="bg-[#0f0f18] border border-[#1e1e30] rounded-xl overflow-hidden">
-            {teams.map((team, i) => (
+            {teams.map((team: TeamWithRelations, i: number) => (
               <div
                 key={team.id}
                 className={`flex items-center justify-between px-6 py-4 ${
@@ -110,10 +109,7 @@ export default async function AdminPage() {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div
-                    className="w-3 h-3 rounded-full"
-                    style={{ background: team.color }}
-                  />
+                  <div className="w-3 h-3 rounded-full" style={{ background: team.color }} />
                   <span className="text-sm font-bold text-slate-200">{team.name}</span>
                 </div>
                 <div className="flex gap-6 text-xs text-slate-500">
@@ -132,17 +128,14 @@ export default async function AdminPage() {
         <div>
           <div className="text-xs font-bold text-slate-500 tracking-widest mb-4">TASK OVERVIEW</div>
           <div className="grid grid-cols-3 gap-4">
-            {tasks.map((stat) => {
+            {tasks.map((stat: TaskStat) => {
               const colors: Record<string, string> = {
                 TODO: "text-slate-400",
                 IN_PROGRESS: "text-amber-400",
                 DONE: "text-emerald-400",
               };
               return (
-                <div
-                  key={stat.status}
-                  className="bg-[#0f0f18] border border-[#1e1e30] rounded-xl p-5"
-                >
+                <div key={stat.status} className="bg-[#0f0f18] border border-[#1e1e30] rounded-xl p-5">
                   <div className={`text-2xl font-black ${colors[stat.status]}`}>
                     {stat._count}
                   </div>
@@ -155,7 +148,7 @@ export default async function AdminPage() {
           </div>
         </div>
 
-        {/* Session info */}
+        {/* Session */}
         <div>
           <div className="text-xs font-bold text-slate-500 tracking-widest mb-4">CURRENT SESSION</div>
           <div className="bg-[#0f0f18] border border-[#1e1e30] rounded-xl p-5 flex items-center gap-4">
