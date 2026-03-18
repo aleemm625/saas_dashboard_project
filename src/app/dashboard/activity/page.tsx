@@ -45,7 +45,7 @@ export default async function ActivityPage() {
             <p className="text-slate-500 text-sm">No activity yet.</p>
           </div>
         ) : (
-          logs.map((log, i) => {
+            logs.map((log: typeof logs[number], i: number) => {
             const avatarColor =
               avatarColors[
                 log.user.name
