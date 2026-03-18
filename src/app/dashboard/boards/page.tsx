@@ -75,7 +75,7 @@ export default async function BoardsPage({
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-4">
-          {boards.map((board) => {
+          {boards.map((board: typeof boards[number]) => {
             const done = board.tasks.filter((t) => t.status === "DONE").length;
             const total = board._count.tasks;
             const pct = total ? Math.round((done / total) * 100) : 0;

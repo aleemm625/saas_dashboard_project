@@ -109,7 +109,7 @@ export default async function TasksPage({
                 </div>
               ) : (
                 <div className="flex flex-col gap-2">
-                  {colTasks.map((task) => {
+                   {colTasks.map((task: typeof colTasks[number]) => {
                     const priority = priorityConfig[task.priority];
                     return (
                       <div

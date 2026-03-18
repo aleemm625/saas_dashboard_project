@@ -33,7 +33,7 @@ export default async function TeamsPage() {
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-4">
-          {teams.map((team) => (
+          {teams.map((team: typeof teams[number]) => (
             <Link
               key={team.id}
               href={`/dashboard/boards?teamId=${team.id}`}
